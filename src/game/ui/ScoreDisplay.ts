@@ -19,8 +19,7 @@ export class ScoreDisplay {
       {
         fontSize: `${GameConstants.SCORE_FONT_SIZE}px`,
         color: '#2C3E50',
-        fontFamily: 'Arial, sans-serif',
-        fontStyle: 'bold'
+        fontFamily: 'PixelGame'
       }
     );
     this.scoreText.setDepth(100);
