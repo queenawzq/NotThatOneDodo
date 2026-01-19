@@ -34,6 +34,10 @@ export class PreloadScene extends Phaser.Scene {
     // Load subtitle and play button
     this.load.image('subtitle', 'assets/ui/subtitle.png');
     this.load.image('play-button', 'assets/ui/play-button.png');
+
+    // Load heart images
+    this.load.image('heart', 'assets/ui/heart-full.png');
+    this.load.image('heartEmpty', 'assets/ui/heart-empty.png');
   }
 
   create(): void {
@@ -41,7 +45,6 @@ export class PreloadScene extends Phaser.Scene {
     this.createPlayerAnimations();
 
     // Generate placeholder textures for UI assets
-    this.createHeartTexture();
     this.createButtonTexture();
 
     // Proceed to menu
@@ -64,30 +67,6 @@ export class PreloadScene extends Phaser.Scene {
       frameRate: 12,
       repeat: 0
     });
-  }
-
-  private createHeartTexture(): void {
-    const graphics = this.make.graphics({ x: 0, y: 0 });
-    const size = 24;
-
-    graphics.fillStyle(0xFF0000);
-    // Simple heart shape using circles and triangle
-    graphics.fillCircle(7, 8, 7);
-    graphics.fillCircle(17, 8, 7);
-    graphics.fillTriangle(0, 10, 24, 10, 12, 24);
-
-    graphics.generateTexture('heart', size, size);
-
-    // Empty heart for lost lives
-    graphics.clear();
-    graphics.lineStyle(2, 0xFF0000);
-    graphics.strokeCircle(7, 8, 6);
-    graphics.strokeCircle(17, 8, 6);
-    graphics.lineBetween(1, 10, 12, 23);
-    graphics.lineBetween(23, 10, 12, 23);
-
-    graphics.generateTexture('heartEmpty', size, size);
-    graphics.destroy();
   }
 
   private createButtonTexture(): void {
