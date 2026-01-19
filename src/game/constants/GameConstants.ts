@@ -1,6 +1,6 @@
 export const GameConstants = {
   // Canvas dimensions
-  GAME_WIDTH: 480,
+  GAME_WIDTH: 720,
   GAME_HEIGHT: 720,
 
   // Player settings
