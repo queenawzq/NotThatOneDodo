@@ -11,7 +11,7 @@ export class MenuScene extends Phaser.Scene {
 
     // Logo
     const logo = this.add.image(centerX, 200, 'logo');
-    logo.setScale(0.8);
+    logo.setScale(0.4);
 
     // Bounce animation for logo
     this.tweens.add({
