@@ -31,7 +31,7 @@ export class MenuScene extends Phaser.Scene {
     // Subtitle
     const subtitle = this.add.image(centerX, 380, 'subtitle');
     subtitle.setOrigin(0.5);
-    subtitle.setScale(0.7);
+    subtitle.setScale(0.6);
 
     // Play button
     const playButton = this.add.image(centerX, 510, 'play-button')
