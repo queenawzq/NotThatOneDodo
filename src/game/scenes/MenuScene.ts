@@ -52,7 +52,7 @@ export class MenuScene extends Phaser.Scene {
     });
 
     // Controls hint
-    this.add.text(centerX, 620, 'Use arrow keys or mouse/touch to move', {
+    this.add.text(centerX, 660, 'Use arrow keys or mouse/touch to move', {
       fontSize: '26px',
       color: '#000000',
       fontFamily: 'PixelGame'
