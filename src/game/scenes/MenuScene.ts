@@ -31,18 +31,20 @@ export class MenuScene extends Phaser.Scene {
     // Subtitle
     const subtitle = this.add.image(centerX, 380, 'subtitle');
     subtitle.setOrigin(0.5);
+    subtitle.setScale(0.5);
 
     // Play button
     const playButton = this.add.image(centerX, 480, 'play-button')
       .setInteractive({ useHandCursor: true });
+    playButton.setScale(0.5);
 
     // Button hover effects
     playButton.on('pointerover', () => {
-      playButton.setScale(1.05);
+      playButton.setScale(0.55);
     });
 
     playButton.on('pointerout', () => {
-      playButton.setScale(1);
+      playButton.setScale(0.5);
     });
 
     playButton.on('pointerdown', () => {
