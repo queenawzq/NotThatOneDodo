@@ -26,6 +26,7 @@ export class GameScene extends Phaser.Scene {
   private screenShake!: ScreenShake;
   private playerFeedback!: PlayerFeedback;
   private isGameOver: boolean = false;
+  private bgMusic!: Phaser.Sound.BaseSound;
 
   constructor() {
     super({ key: 'GameScene' });
@@ -87,6 +88,10 @@ export class GameScene extends Phaser.Scene {
     // Start the game
     this.treatFactory.startSpawning();
     this.difficultyManager.start();
+
+    // Start background music
+    this.bgMusic = this.sound.add('bgm-game', { loop: true, volume: 0.5 });
+    this.bgMusic.play();
 
     // Fade in
     this.cameras.main.fadeIn(300);
@@ -202,5 +207,7 @@ export class GameScene extends Phaser.Scene {
     this.livesManager.off('gameOver', this.handleGameOver, this);
     this.difficultyManager.off('levelUp', this.handleLevelUp, this);
     this.treatFactory.clearAll();
+    // Stop background music
+    this.bgMusic.stop();
   }
 }

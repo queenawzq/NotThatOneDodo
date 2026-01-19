@@ -43,6 +43,11 @@ export class PreloadScene extends Phaser.Scene {
     this.load.audio('sfx-eat', 'assets/sound-effects/eat.mp3');
     this.load.audio('sfx-earn-point', 'assets/sound-effects/earn-point.mp3');
     this.load.audio('sfx-die', 'assets/sound-effects/die.mp3');
+    this.load.audio('sfx-select', 'assets/sound-effects/select.mp3');
+    this.load.audio('sfx-start', 'assets/sound-effects/start.mp3');
+
+    // Load background music
+    this.load.audio('bgm-game', 'assets/songs/move-forward.mp3');
   }
 
   create(): void {

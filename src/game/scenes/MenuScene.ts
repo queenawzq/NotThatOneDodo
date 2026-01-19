@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import { GameConstants } from '../constants/GameConstants';
 
 export class MenuScene extends Phaser.Scene {
+  private bgMusic!: Phaser.Sound.BaseSound;
+
   constructor() {
     super({ key: 'MenuScene' });
   }
@@ -9,10 +11,24 @@ export class MenuScene extends Phaser.Scene {
   create(): void {
     const centerX = GameConstants.GAME_WIDTH / 2;
 
-    // Background
+    // Start background music
+    if (!this.sound.get('bgm-game')?.isPlaying) {
+      this.bgMusic = this.sound.add('bgm-game', { loop: true, volume: 0.5 });
+      this.bgMusic.play();
+    }
+
+    // Unlock audio on first interaction
+    this.input.once('pointerdown', () => {
+      if (this.sound.locked) {
+        this.sound.unlock();
+      }
+    });
+
+    // Background (interactive to unlock audio)
     const bg = this.add.image(centerX, GameConstants.GAME_HEIGHT / 2, 'menu-background');
     bg.setDisplaySize(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
     bg.setDepth(-1);
+    bg.setInteractive();
 
     // Logo
     const logo = this.add.image(centerX, 250, 'logo');
@@ -41,6 +57,7 @@ export class MenuScene extends Phaser.Scene {
     // Button hover effects
     playButton.on('pointerover', () => {
       playButton.setScale(0.77);
+      this.sound.play('sfx-select');
     });
 
     playButton.on('pointerout', () => {
@@ -48,6 +65,7 @@ export class MenuScene extends Phaser.Scene {
     });
 
     playButton.on('pointerdown', () => {
+      this.sound.play('sfx-start');
       this.startGame();
     });
 
@@ -60,14 +78,19 @@ export class MenuScene extends Phaser.Scene {
 
     // Keyboard support for starting
     this.input.keyboard?.once('keydown-SPACE', () => {
+      this.sound.play('sfx-start');
       this.startGame();
     });
     this.input.keyboard?.once('keydown-ENTER', () => {
+      this.sound.play('sfx-start');
       this.startGame();
     });
   }
 
   private startGame(): void {
+    // Stop menu music before transitioning
+    this.sound.stopByKey('bgm-game');
+
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => {
       this.scene.start('GameScene');
