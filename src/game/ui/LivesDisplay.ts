@@ -6,7 +6,8 @@ export class LivesDisplay {
   private scene: Phaser.Scene;
   private livesManager: LivesManager;
   private hearts: Phaser.GameObjects.Image[] = [];
-  private readonly heartSpacing: number = 30;
+  private readonly heartSpacing: number = 40;
+  private readonly rightMargin: number = 40;
 
   constructor(scene: Phaser.Scene, livesManager: LivesManager) {
     this.scene = scene;
@@ -19,7 +20,7 @@ export class LivesDisplay {
   }
 
   private createHearts(): void {
-    const startX = GameConstants.GAME_WIDTH - GameConstants.UI_PADDING - (GameConstants.MAX_LIVES - 1) * this.heartSpacing;
+    const startX = GameConstants.GAME_WIDTH - this.rightMargin - (GameConstants.MAX_LIVES - 1) * this.heartSpacing;
     const y = GameConstants.UI_PADDING + 12;
 
     for (let i = 0; i < GameConstants.MAX_LIVES; i++) {

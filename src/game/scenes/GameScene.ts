@@ -115,11 +115,16 @@ export class GameScene extends Phaser.Scene {
       this.pointsPopup.show(treat.x, treat.y, points);
     }
 
+    // Play eat sound for any treat
+    this.sound.play('sfx-eat');
+
     // Apply effects
     if (isSafe) {
       // Good treat collected
       this.scoreManager.addPoints(points);
       this.playerFeedback.happy();
+      // Play earn point sound
+      this.sound.play('sfx-earn-point');
     } else {
       // Bad treat collected
       if (points !== 0) {
@@ -128,6 +133,8 @@ export class GameScene extends Phaser.Scene {
       if (livesChange !== 0) {
         this.livesManager.loseLife(Math.abs(livesChange));
         this.playerFeedback.oops(true);
+        // Play die sound when losing a life
+        this.sound.play('sfx-die');
       } else {
         this.playerFeedback.oops(false);
       }

@@ -38,6 +38,11 @@ export class PreloadScene extends Phaser.Scene {
     // Load heart images
     this.load.image('heart', 'assets/ui/heart-full.png');
     this.load.image('heartEmpty', 'assets/ui/heart-empty.png');
+
+    // Load sound effects
+    this.load.audio('sfx-eat', 'assets/sound-effects/eat.mp3');
+    this.load.audio('sfx-earn-point', 'assets/sound-effects/earn-point.mp3');
+    this.load.audio('sfx-die', 'assets/sound-effects/die.mp3');
   }
 
   create(): void {
