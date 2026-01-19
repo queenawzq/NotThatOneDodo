@@ -29,7 +29,7 @@ export class MenuScene extends Phaser.Scene {
     });
 
     // Subtitle
-    const subtitle = this.add.image(centerX, 380, 'subtitle');
+    const subtitle = this.add.image(centerX, 420, 'subtitle');
     subtitle.setOrigin(0.5);
     subtitle.setScale(0.5);
 
