@@ -15,13 +15,13 @@ export class MenuScene extends Phaser.Scene {
     bg.setDepth(-1);
 
     // Logo
-    const logo = this.add.image(centerX, 200, 'logo');
+    const logo = this.add.image(centerX, 250, 'logo');
     logo.setScale(0.52);
 
     // Bounce animation for logo
     this.tweens.add({
       targets: logo,
-      y: 190,
+      y: 240,
       duration: 500,
       yoyo: true,
       repeat: -1,
@@ -29,12 +29,12 @@ export class MenuScene extends Phaser.Scene {
     });
 
     // Subtitle
-    const subtitle = this.add.image(centerX, 410, 'subtitle');
+    const subtitle = this.add.image(centerX, 460, 'subtitle');
     subtitle.setOrigin(0.5);
     subtitle.setScale(0.6);
 
     // Play button
-    const playButton = this.add.image(centerX, 510, 'play-button')
+    const playButton = this.add.image(centerX, 560, 'play-button')
       .setInteractive({ useHandCursor: true });
     playButton.setScale(0.7);
 
