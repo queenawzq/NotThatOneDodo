@@ -29,22 +29,22 @@ export class MenuScene extends Phaser.Scene {
     });
 
     // Subtitle
-    const subtitle = this.add.image(centerX, 400, 'subtitle');
+    const subtitle = this.add.image(centerX, 380, 'subtitle');
     subtitle.setOrigin(0.5);
-    subtitle.setScale(0.5);
+    subtitle.setScale(0.7);
 
     // Play button
-    const playButton = this.add.image(centerX, 480, 'play-button')
+    const playButton = this.add.image(centerX, 510, 'play-button')
       .setInteractive({ useHandCursor: true });
-    playButton.setScale(0.5);
+    playButton.setScale(0.7);
 
     // Button hover effects
     playButton.on('pointerover', () => {
-      playButton.setScale(0.55);
+      playButton.setScale(0.77);
     });
 
     playButton.on('pointerout', () => {
-      playButton.setScale(0.5);
+      playButton.setScale(0.7);
     });
 
     playButton.on('pointerdown', () => {
