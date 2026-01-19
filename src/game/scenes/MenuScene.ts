@@ -9,6 +9,11 @@ export class MenuScene extends Phaser.Scene {
   create(): void {
     const centerX = GameConstants.GAME_WIDTH / 2;
 
+    // Background
+    const bg = this.add.image(centerX, GameConstants.GAME_HEIGHT / 2, 'menu-background');
+    bg.setDisplaySize(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
+    bg.setDepth(-1);
+
     // Logo
     const logo = this.add.image(centerX, 200, 'logo');
     logo.setScale(0.4);

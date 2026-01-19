@@ -27,6 +27,9 @@ export class PreloadScene extends Phaser.Scene {
 
     // Load logo
     this.load.image('logo', 'assets/ui/logo.png');
+
+    // Load menu background
+    this.load.image('menu-background', 'assets/ui/menu-background.png');
   }
 
   create(): void {
