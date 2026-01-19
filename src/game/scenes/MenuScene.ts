@@ -53,9 +53,9 @@ export class MenuScene extends Phaser.Scene {
 
     // Controls hint
     this.add.text(centerX, 620, 'Use arrow keys or mouse/touch to move', {
-      fontSize: '14px',
+      fontSize: '16px',
       color: '#95A5A6',
-      fontFamily: 'Arial, sans-serif'
+      fontFamily: 'PixelGame'
     }).setOrigin(0.5);
 
     // Keyboard support for starting
