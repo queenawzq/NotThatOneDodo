@@ -34,18 +34,14 @@ export class GameScene extends Phaser.Scene {
   create(): void {
     this.isGameOver = false;
 
-    // Set up background
-    this.cameras.main.setBackgroundColor('#87CEEB');
-
-    // Draw ground
-    const ground = this.add.rectangle(
+    // Set up background image
+    const bg = this.add.image(
       GameConstants.GAME_WIDTH / 2,
-      GameConstants.GAME_HEIGHT - 30,
-      GameConstants.GAME_WIDTH,
-      60,
-      0x7CB342
+      GameConstants.GAME_HEIGHT / 2,
+      'background'
     );
-    ground.setDepth(-1);
+    bg.setDisplaySize(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
+    bg.setDepth(-1);
 
     // Create systems
     this.scoreManager = new ScoreManager(this);

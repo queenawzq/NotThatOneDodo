@@ -21,6 +21,9 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 512,
       frameHeight: 512
     });
+
+    // Load background image
+    this.load.image('background', 'assets/ui/background.png');
   }
 
   create(): void {
