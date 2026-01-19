@@ -13,7 +13,13 @@ export class Treat extends Phaser.Physics.Arcade.Sprite {
     this.fallSpeed = fallSpeed;
 
     // Scale image proportionally to fit target size (3x bigger)
-    const targetSize = GameConstants.TREAT_SIZE * 3;
+    let targetSize = GameConstants.TREAT_SIZE * 3;
+
+    // Ice cream is slightly smaller in the source image, make it bigger
+    if (config.key === 'iceCream') {
+      targetSize *= 1.3;
+    }
+
     const maxDimension = Math.max(this.width, this.height);
     const scale = targetSize / maxDimension;
     this.setScale(scale);
