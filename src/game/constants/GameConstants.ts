@@ -33,7 +33,7 @@ export const GameConstants = {
   TREAT_SIZE: 32,
 
   // UI
-  SCORE_FONT_SIZE: 24,
+  SCORE_FONT_SIZE: 48,
   UI_PADDING: 16,
 
   // Animation durations
