@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Not That One, Dodo!</title>
+  <link rel="preload" href="/assets/fonts/pixel-game.otf" as="font" type="font/otf" crossorigin>
   <style>
     @font-face {
       font-family: 'PixelGame';
@@ -35,6 +36,8 @@
   </style>
 </head>
 <body>
+  <!-- Preload font by using it in a hidden element -->
+  <div style="font-family: 'PixelGame'; position: absolute; left: -9999px;">.</div>
   <div id="game-container"></div>
   <script type="module" src="/src/main.ts"></script>
 </body>
