@@ -12,8 +12,11 @@ export class Treat extends Phaser.Physics.Arcade.Sprite {
     this.config = config;
     this.fallSpeed = fallSpeed;
 
-    // Scale image to target size
-    this.setDisplaySize(GameConstants.TREAT_SIZE, GameConstants.TREAT_SIZE);
+    // Scale image proportionally to fit target size (3x bigger)
+    const targetSize = GameConstants.TREAT_SIZE * 3;
+    const maxDimension = Math.max(this.width, this.height);
+    const scale = targetSize / maxDimension;
+    this.setScale(scale);
   }
 
   startFalling(): void {
