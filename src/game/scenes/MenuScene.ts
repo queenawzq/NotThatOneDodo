@@ -51,14 +51,6 @@ export class MenuScene extends Phaser.Scene {
       this.startGame();
     });
 
-    // High score display
-    const highScore = this.registry.get('highScore') || 0;
-    this.add.text(centerX, 560, `High Score: ${highScore}`, {
-      fontSize: '20px',
-      color: '#7F8C8D',
-      fontFamily: 'Arial, sans-serif'
-    }).setOrigin(0.5);
-
     // Controls hint
     this.add.text(centerX, 620, 'Use arrow keys or mouse/touch to move', {
       fontSize: '14px',
