@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import { TreatTypes } from '../constants/TreatTypes';
-import { GameConstants } from '../constants/GameConstants';
 
 export class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -12,11 +11,23 @@ export class PreloadScene extends Phaser.Scene {
     for (const treat of TreatTypes) {
       this.load.image(treat.key, `assets/treats/${treat.key}.png`);
     }
+
+    // Load player spritesheets
+    this.load.spritesheet('player-run', 'assets/sprite/run.png', {
+      frameWidth: 512,
+      frameHeight: 512
+    });
+    this.load.spritesheet('player-eat', 'assets/sprite/eat.png', {
+      frameWidth: 512,
+      frameHeight: 512
+    });
   }
 
   create(): void {
-    // Generate placeholder textures for non-treat assets
-    this.createPlayerTexture();
+    // Create player animations
+    this.createPlayerAnimations();
+
+    // Generate placeholder textures for UI assets
     this.createHeartTexture();
     this.createButtonTexture();
 
@@ -24,39 +35,22 @@ export class PreloadScene extends Phaser.Scene {
     this.scene.start('MenuScene');
   }
 
-  private createPlayerTexture(): void {
-    const graphics = this.make.graphics({ x: 0, y: 0 });
-    const width = GameConstants.PLAYER_WIDTH;
-    const height = GameConstants.PLAYER_HEIGHT;
+  private createPlayerAnimations(): void {
+    // Run animation (4 frames)
+    this.anims.create({
+      key: 'run',
+      frames: this.anims.generateFrameNumbers('player-run', { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1
+    });
 
-    // Body (brown rectangle with rounded appearance)
-    graphics.fillStyle(0x8B4513); // Saddle brown
-    graphics.fillRoundedRect(0, 10, width, height - 10, 8);
-
-    // Head
-    graphics.fillStyle(0xA0522D); // Sienna
-    graphics.fillCircle(width / 2, 15, 18);
-
-    // Ears
-    graphics.fillStyle(0x654321); // Dark brown
-    graphics.fillEllipse(12, 5, 10, 15);
-    graphics.fillEllipse(width - 12, 5, 10, 15);
-
-    // Eyes
-    graphics.fillStyle(0x000000);
-    graphics.fillCircle(width / 2 - 8, 12, 4);
-    graphics.fillCircle(width / 2 + 8, 12, 4);
-
-    // Nose
-    graphics.fillStyle(0x000000);
-    graphics.fillCircle(width / 2, 22, 5);
-
-    // Tongue (happy dog!)
-    graphics.fillStyle(0xFF69B4);
-    graphics.fillEllipse(width / 2 + 5, 28, 6, 4);
-
-    graphics.generateTexture('player', width, height);
-    graphics.destroy();
+    // Eat animation (3 frames)
+    this.anims.create({
+      key: 'eat',
+      frames: this.anims.generateFrameNumbers('player-eat', { start: 0, end: 2 }),
+      frameRate: 12,
+      repeat: 0
+    });
   }
 
   private createHeartTexture(): void {
