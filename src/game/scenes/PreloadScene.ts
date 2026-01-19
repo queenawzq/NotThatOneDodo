@@ -7,10 +7,16 @@ export class PreloadScene extends Phaser.Scene {
     super({ key: 'PreloadScene' });
   }
 
+  preload(): void {
+    // Load treat images from assets folder
+    for (const treat of TreatTypes) {
+      this.load.image(treat.key, `assets/treats/${treat.key}.png`);
+    }
+  }
+
   create(): void {
-    // Generate placeholder textures programmatically
+    // Generate placeholder textures for non-treat assets
     this.createPlayerTexture();
-    this.createTreatTextures();
     this.createHeartTexture();
     this.createButtonTexture();
 
@@ -51,34 +57,6 @@ export class PreloadScene extends Phaser.Scene {
 
     graphics.generateTexture('player', width, height);
     graphics.destroy();
-  }
-
-  private createTreatTextures(): void {
-    const size = GameConstants.TREAT_SIZE;
-
-    for (const treat of TreatTypes) {
-      const graphics = this.make.graphics({ x: 0, y: 0 });
-
-      if (treat.category === 'safe') {
-        // Safe treats are circles
-        graphics.fillStyle(treat.color);
-        graphics.fillCircle(size / 2, size / 2, size / 2 - 2);
-        // Add a shine effect
-        graphics.fillStyle(0xFFFFFF, 0.3);
-        graphics.fillCircle(size / 2 - 4, size / 2 - 4, 4);
-      } else {
-        // Unsafe treats are slightly different shape (hexagon-ish)
-        graphics.fillStyle(treat.color);
-        graphics.fillCircle(size / 2, size / 2, size / 2 - 2);
-        // Add warning indicator (X mark)
-        graphics.lineStyle(3, 0xFF0000, 0.7);
-        graphics.lineBetween(6, 6, size - 6, size - 6);
-        graphics.lineBetween(size - 6, 6, 6, size - 6);
-      }
-
-      graphics.generateTexture(treat.key, size, size);
-      graphics.destroy();
-    }
   }
 
   private createHeartTexture(): void {

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { TreatConfig } from '../constants/TreatTypes';
+import { GameConstants } from '../constants/GameConstants';
 
 export class Treat extends Phaser.Physics.Arcade.Sprite {
   public config: TreatConfig;
@@ -10,6 +11,9 @@ export class Treat extends Phaser.Physics.Arcade.Sprite {
 
     this.config = config;
     this.fallSpeed = fallSpeed;
+
+    // Scale image to target size
+    this.setDisplaySize(GameConstants.TREAT_SIZE, GameConstants.TREAT_SIZE);
   }
 
   startFalling(): void {
