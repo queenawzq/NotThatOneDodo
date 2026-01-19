@@ -29,34 +29,20 @@ export class MenuScene extends Phaser.Scene {
     });
 
     // Subtitle
-    this.add.text(centerX, 380, 'Catch the good treats!\nAvoid the bad ones!', {
-      fontSize: '18px',
-      color: '#34495E',
-      fontFamily: 'Arial, sans-serif',
-      align: 'center',
-      lineSpacing: 8
-    }).setOrigin(0.5);
+    const subtitle = this.add.image(centerX, 380, 'subtitle');
+    subtitle.setOrigin(0.5);
 
     // Play button
-    const playButton = this.add.image(centerX, 480, 'buttonGreen')
+    const playButton = this.add.image(centerX, 480, 'play-button')
       .setInteractive({ useHandCursor: true });
-
-    const playText = this.add.text(centerX, 480, 'PLAY', {
-      fontSize: '24px',
-      color: '#FFFFFF',
-      fontFamily: 'Arial, sans-serif',
-      fontStyle: 'bold'
-    }).setOrigin(0.5);
 
     // Button hover effects
     playButton.on('pointerover', () => {
       playButton.setScale(1.05);
-      playText.setScale(1.05);
     });
 
     playButton.on('pointerout', () => {
       playButton.setScale(1);
-      playText.setScale(1);
     });
 
     playButton.on('pointerdown', () => {

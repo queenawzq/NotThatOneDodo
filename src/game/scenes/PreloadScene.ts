@@ -30,6 +30,10 @@ export class PreloadScene extends Phaser.Scene {
 
     // Load menu background
     this.load.image('menu-background', 'assets/ui/menu-background.png');
+
+    // Load subtitle and play button
+    this.load.image('subtitle', 'assets/ui/subtitle.png');
+    this.load.image('play-button', 'assets/ui/play-button.png');
   }
 
   create(): void {
