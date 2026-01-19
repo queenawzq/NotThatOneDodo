@@ -4,7 +4,7 @@ import { GameConstants } from '../constants/GameConstants';
 export class Player extends Phaser.Physics.Arcade.Sprite {
   private moveSpeed: number = GameConstants.PLAYER_SPEED;
   private isEating: boolean = false;
-  private playerScale: number = 0.1; // Scale down from 512px
+  private playerScale: number = 0.4; // Scale down from 512px
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, 'player-run');
