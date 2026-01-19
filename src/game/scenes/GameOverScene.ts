@@ -12,31 +12,34 @@ export class GameOverScene extends Phaser.Scene {
     const highScore = this.registry.get('highScore') || 0;
     const isNewHighScore = score > 0 && score >= highScore;
 
+    // Play game over sound
+    this.sound.play('sfx-game-over');
+
+    // Background
+    const bg = this.add.image(centerX, GameConstants.GAME_HEIGHT / 2, 'game-over-background');
+    bg.setDisplaySize(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
+    bg.setDepth(-1);
+
     // Update high score if needed
     if (isNewHighScore) {
       this.registry.set('highScore', score);
       this.saveHighScore(score);
     }
 
-    // Game Over title
-    this.add.text(centerX, 120, 'Game Over', {
-      fontSize: '48px',
-      color: '#E74C3C',
-      fontFamily: 'Arial, sans-serif',
-      fontStyle: 'bold'
-    }).setOrigin(0.5);
+    // Game Over title image
+    const gameOverText = this.add.image(centerX, 180, 'game-over-text');
+    gameOverText.setOrigin(0.5);
+    gameOverText.setScale(0.5);
 
-    // Score display
-    this.add.text(centerX, 220, 'Your Score', {
-      fontSize: '20px',
-      color: '#7F8C8D',
-      fontFamily: 'Arial, sans-serif'
-    }).setOrigin(0.5);
+    // Your Score image
+    const yourScoreImg = this.add.image(centerX, 350, 'your-score');
+    yourScoreImg.setOrigin(0.5);
+    yourScoreImg.setScale(0.6);
 
-    const scoreText = this.add.text(centerX, 270, score.toString(), {
-      fontSize: '64px',
+    const scoreText = this.add.text(centerX, 420, score.toString(), {
+      fontSize: '77px',
       color: '#2C3E50',
-      fontFamily: 'Arial, sans-serif',
+      fontFamily: 'PixelGame',
       fontStyle: 'bold'
     }).setOrigin(0.5);
 
@@ -50,10 +53,10 @@ export class GameOverScene extends Phaser.Scene {
 
     // New high score celebration
     if (isNewHighScore) {
-      const newHighText = this.add.text(centerX, 340, 'NEW HIGH SCORE!', {
-        fontSize: '24px',
-        color: '#F39C12',
-        fontFamily: 'Arial, sans-serif',
+      const newHighText = this.add.text(centerX, 470, 'NEW HIGH SCORE!', {
+        fontSize: '36px',
+        color: '#FFFFFF',
+        fontFamily: 'PixelGame',
         fontStyle: 'bold'
       }).setOrigin(0.5);
 
@@ -66,61 +69,30 @@ export class GameOverScene extends Phaser.Scene {
         ease: 'Sine.easeInOut'
       });
     } else {
-      this.add.text(centerX, 340, `High Score: ${highScore}`, {
-        fontSize: '20px',
-        color: '#95A5A6',
-        fontFamily: 'Arial, sans-serif'
+      this.add.text(centerX, 470, `High Score: ${highScore}`, {
+        fontSize: '30px',
+        color: '#FFFFFF',
+        fontFamily: 'PixelGame'
       }).setOrigin(0.5);
     }
 
-    // Play Again button
-    const playAgainButton = this.add.image(centerX, 450, 'buttonGreen')
+    // Restart button
+    const restartButton = this.add.image(centerX, 560, 'restart-button')
       .setInteractive({ useHandCursor: true });
+    restartButton.setScale(0.56);
 
-    const playAgainText = this.add.text(centerX, 450, 'Play Again', {
-      fontSize: '22px',
-      color: '#FFFFFF',
-      fontFamily: 'Arial, sans-serif',
-      fontStyle: 'bold'
-    }).setOrigin(0.5);
-
-    playAgainButton.on('pointerover', () => {
-      playAgainButton.setScale(1.05);
-      playAgainText.setScale(1.05);
+    restartButton.on('pointerover', () => {
+      restartButton.setScale(0.62);
+      this.sound.play('sfx-select');
     });
 
-    playAgainButton.on('pointerout', () => {
-      playAgainButton.setScale(1);
-      playAgainText.setScale(1);
+    restartButton.on('pointerout', () => {
+      restartButton.setScale(0.56);
     });
 
-    playAgainButton.on('pointerdown', () => {
+    restartButton.on('pointerdown', () => {
+      this.sound.play('sfx-start');
       this.restartGame();
-    });
-
-    // Menu button
-    const menuButton = this.add.image(centerX, 520, 'buttonGray')
-      .setInteractive({ useHandCursor: true });
-
-    const menuText = this.add.text(centerX, 520, 'Menu', {
-      fontSize: '22px',
-      color: '#FFFFFF',
-      fontFamily: 'Arial, sans-serif',
-      fontStyle: 'bold'
-    }).setOrigin(0.5);
-
-    menuButton.on('pointerover', () => {
-      menuButton.setScale(1.05);
-      menuText.setScale(1.05);
-    });
-
-    menuButton.on('pointerout', () => {
-      menuButton.setScale(1);
-      menuText.setScale(1);
-    });
-
-    menuButton.on('pointerdown', () => {
-      this.goToMenu();
     });
 
     // Keyboard shortcuts
@@ -129,9 +101,6 @@ export class GameOverScene extends Phaser.Scene {
     });
     this.input.keyboard?.once('keydown-ENTER', () => {
       this.restartGame();
-    });
-    this.input.keyboard?.once('keydown-ESC', () => {
-      this.goToMenu();
     });
 
     // Fade in
@@ -150,13 +119,6 @@ export class GameOverScene extends Phaser.Scene {
     this.cameras.main.fadeOut(200, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => {
       this.scene.start('GameScene');
-    });
-  }
-
-  private goToMenu(): void {
-    this.cameras.main.fadeOut(200, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.start('MenuScene');
     });
   }
 }

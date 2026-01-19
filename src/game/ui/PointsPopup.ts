@@ -14,9 +14,9 @@ export class PointsPopup {
     const color = isPositive ? '#27AE60' : '#E74C3C';
 
     const popup = this.scene.add.text(x, y, text, {
-      fontSize: '24px',
+      fontSize: '36px',
       color: color,
-      fontFamily: 'Arial, sans-serif',
+      fontFamily: 'PixelGame',
       fontStyle: 'bold',
       stroke: '#FFFFFF',
       strokeThickness: 3

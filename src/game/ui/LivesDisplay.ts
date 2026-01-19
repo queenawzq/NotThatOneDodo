@@ -29,6 +29,7 @@ export class LivesDisplay {
         y,
         'heart'
       );
+      heart.setOrigin(0.5, 0.5);
       heart.setScale(0.15);
       heart.setDepth(100);
       this.hearts.push(heart);

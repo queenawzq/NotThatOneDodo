@@ -27,6 +27,9 @@ export class GameScene extends Phaser.Scene {
   private playerFeedback!: PlayerFeedback;
   private isGameOver: boolean = false;
   private bgMusic!: Phaser.Sound.BaseSound;
+  private timerText!: Phaser.GameObjects.Text;
+  private timeRemaining: number = 60;
+  private timerEvent!: Phaser.Time.TimerEvent;
 
   constructor() {
     super({ key: 'GameScene' });
@@ -34,6 +37,7 @@ export class GameScene extends Phaser.Scene {
 
   create(): void {
     this.isGameOver = false;
+    this.timeRemaining = 60;
 
     // Set up background image
     const bg = this.add.image(
@@ -69,6 +73,28 @@ export class GameScene extends Phaser.Scene {
     this.scoreDisplay = new ScoreDisplay(this, this.scoreManager);
     this.livesDisplay = new LivesDisplay(this, this.livesManager);
     this.pointsPopup = new PointsPopup(this);
+
+    // Create timer display at top center
+    this.timerText = this.add.text(
+      GameConstants.GAME_WIDTH / 2,
+      GameConstants.UI_PADDING,
+      this.formatTime(this.timeRemaining),
+      {
+        fontSize: `${GameConstants.SCORE_FONT_SIZE}px`,
+        color: '#2C3E50',
+        fontFamily: 'PixelGame'
+      }
+    );
+    this.timerText.setOrigin(0.5, 0);
+    this.timerText.setDepth(100);
+
+    // Start countdown timer
+    this.timerEvent = this.time.addEvent({
+      delay: 1000,
+      callback: this.updateTimer,
+      callbackScope: this,
+      loop: true
+    });
 
     // Set up collisions
     this.physics.add.overlap(
@@ -158,7 +184,7 @@ export class GameScene extends Phaser.Scene {
       {
         fontSize: '32px',
         color: '#FFFFFF',
-        fontFamily: 'Arial, sans-serif',
+        fontFamily: 'PixelGame',
         fontStyle: 'bold',
         stroke: '#2C3E50',
         strokeThickness: 4
@@ -177,6 +203,34 @@ export class GameScene extends Phaser.Scene {
       ease: 'Cubic.easeOut',
       onComplete: () => levelText.destroy()
     });
+  }
+
+  private formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  private updateTimer(): void {
+    if (this.isGameOver) return;
+
+    this.timeRemaining--;
+    this.timerText.setText(this.formatTime(this.timeRemaining));
+
+    // Flash red when time is low
+    if (this.timeRemaining <= 10) {
+      this.timerText.setColor('#E74C3C');
+      this.tweens.add({
+        targets: this.timerText,
+        scale: { from: 1.2, to: 1 },
+        duration: 200
+      });
+    }
+
+    // Time's up
+    if (this.timeRemaining <= 0) {
+      this.handleGameOver();
+    }
   }
 
   private handleGameOver(): void {
@@ -207,6 +261,10 @@ export class GameScene extends Phaser.Scene {
     this.livesManager.off('gameOver', this.handleGameOver, this);
     this.difficultyManager.off('levelUp', this.handleLevelUp, this);
     this.treatFactory.clearAll();
+    // Stop timer
+    if (this.timerEvent) {
+      this.timerEvent.destroy();
+    }
     // Stop background music
     this.bgMusic.stop();
   }

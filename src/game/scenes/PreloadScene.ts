@@ -39,12 +39,19 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('heart', 'assets/ui/heart-full.png');
     this.load.image('heartEmpty', 'assets/ui/heart-empty.png');
 
+    // Load game over assets
+    this.load.image('game-over-background', 'assets/ui/game-over.png');
+    this.load.image('game-over-text', 'assets/ui/game-over-text.png');
+    this.load.image('your-score', 'assets/ui/your-score.png');
+    this.load.image('restart-button', 'assets/ui/restart-button.png');
+
     // Load sound effects
     this.load.audio('sfx-eat', 'assets/sound-effects/eat.mp3');
     this.load.audio('sfx-earn-point', 'assets/sound-effects/earn-point.mp3');
     this.load.audio('sfx-die', 'assets/sound-effects/die.mp3');
     this.load.audio('sfx-select', 'assets/sound-effects/select.mp3');
     this.load.audio('sfx-start', 'assets/sound-effects/start.mp3');
+    this.load.audio('sfx-game-over', 'assets/sound-effects/game-over-sound-effect.mp3');
 
     // Load background music
     this.load.audio('bgm-game', 'assets/songs/move-forward.mp3');
