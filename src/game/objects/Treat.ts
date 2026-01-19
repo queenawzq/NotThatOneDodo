@@ -20,6 +20,11 @@ export class Treat extends Phaser.Physics.Arcade.Sprite {
       targetSize *= 1.3;
     }
 
+    // Broccoli is slightly bigger, make it smaller
+    if (config.key === 'broccoli') {
+      targetSize *= 0.8;
+    }
+
     const maxDimension = Math.max(this.width, this.height);
     const scale = targetSize / maxDimension;
     this.setScale(scale);
