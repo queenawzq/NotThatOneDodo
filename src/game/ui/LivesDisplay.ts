@@ -28,7 +28,7 @@ export class LivesDisplay {
         y,
         'heart'
       );
-      heart.setScale(0.1);
+      heart.setScale(0.15);
       heart.setDepth(100);
       this.hearts.push(heart);
     }
@@ -54,12 +54,12 @@ export class LivesDisplay {
       this.scene.tweens.add({
         targets: lostHeart,
         alpha: { from: 1, to: 0.3 },
-        scale: { from: 0.1, to: 0.08 },
+        scale: { from: 0.15, to: 0.12 },
         duration: 300,
         onComplete: () => {
           lostHeart.setTexture('heartEmpty');
           lostHeart.setAlpha(0.5);
-          lostHeart.setScale(0.1);
+          lostHeart.setScale(0.15);
         }
       });
     }
