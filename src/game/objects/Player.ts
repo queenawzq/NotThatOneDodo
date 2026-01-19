@@ -46,8 +46,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  stop(): void {
+  stop(): this {
     this.setVelocityX(0);
+    return this;
   }
 
   moveToX(targetX: number): void {

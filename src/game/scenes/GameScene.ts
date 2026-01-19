@@ -100,7 +100,7 @@ export class GameScene extends Phaser.Scene {
     this.physics.add.overlap(
       this.player,
       this.treatFactory.getGroup(),
-      this.handleTreatCollision,
+      this.handleTreatCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
       undefined,
       this
     );
@@ -131,8 +131,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   private handleTreatCollision(
-    _player: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Tilemaps.Tile,
-    treatObj: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Tilemaps.Tile
+    _player: Phaser.GameObjects.GameObject,
+    treatObj: Phaser.GameObjects.GameObject
   ): void {
     const treat = treatObj as Treat;
     if (!treat.active) return;
